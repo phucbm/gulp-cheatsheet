@@ -1,37 +1,132 @@
-## Welcome to GitHub Pages
+# Gulp cheatsheet
 
-You can use the [editor on GitHub](https://github.com/phucbm/gulp-cheatsheet/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+https://gulpjs.com/docs/en/getting-started/quick-start/
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Create a package.json file in your project directory
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```text
+npm init
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+Install the gulp package
 
-### Jekyll Themes
+```text
+npm install --save-dev gulp
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/phucbm/gulp-cheatsheet/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Create a gulpfile
 
-### Support or Contact
+Create a file named gulpfile.js in your project root.
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+## Task
+
+### Browser sync
+
+https://browsersync.io/docs/gulp
+
+```js
+const gulp = require('gulp');
+const browserSync = require('browser-sync').create();
+
+// Static server
+gulpfile.task('serve', function(){
+    // Watch for all files change and reload
+    gulpfile.watch('**').on('change', () => {
+        browserSync.reload();
+    });
+
+    // serve files from root directory
+    browserSync.init({
+        server: {
+            baseDir: "./"
+        }
+    });
+
+    // serve files from /app folder
+    browserSync.init({
+        server: {
+            baseDir: "./app"
+        }
+    });
+
+    // serve files both root and /app
+    browserSync.init({
+        server: ["./", "./app"]
+    });
+});
+```
+
+### Copy files to new folder
+
+https://gulpjs.com/docs/en/api/dest/
+
+```js
+const gulp = require('gulp');
+const files = [
+    'assets/**/*.*', // all files and sub-folder in assets folder
+    'index.html'
+];
+
+// copy files and create /app folder in root
+gulp.task('create-app', () => {
+    return gulp.src(files, {base: './'})
+        .pipe(gulp.dest('app'));
+});
+```
+
+### Zip
+
+https://www.npmjs.com/package/gulp-zip
+
+```text
+npm install --save-dev gulp-zip
+```
+
+```js
+const gulp = require('gulp');
+const zip = require('gulp-zip');
+
+gulp.task('zip', () => {
+    return gulp.src(['dist/**/*.*'], {base: './'})
+        .pipe(zip(`filename.zip`))
+        .pipe(gulp.dest('extension'));
+});
+```
+
+### Delete
+
+```js
+const gulp = require('gulp');
+const del = require('del');
+
+gulp.task('clean', function(){
+    return del('dist', {force: true});
+});
+```
+
+### Uglify
+
+### Replace
+
+```js
+gulp.task('replace', function(){
+    return gulp.src(['./scroll-snooper.js', './README.md', './test/*', './example/*'])
+        .pipe(replace(oldVersion, function handleReplace(match){
+            console.log(`[${count}] Found "${oldVersion}"`);
+            count++;
+            return newVersion;
+        }))
+        .pipe(gulp.dest(function(file){
+            console.log(file.base)
+            return file.base;
+        }, {overwrite: true}));
+});
+```
+
+### Readline
+
+### Group tasks
+
+```js
+gulp.task('export', gulp.series('dist', 'zip', 'clean'));
+```

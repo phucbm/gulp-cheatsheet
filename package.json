@@ -1,0 +1,26 @@
+{
+  "name": "gulp-cheatsheet",
+  "version": "1.0.0",
+  "description": "A collection of cheatsheet I've written.",
+  "main": "gulp.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phucbm/gulp-cheatsheet.git"
+  },
+  "author": "phucbm",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phucbm/gulp-cheatsheet/issues"
+  },
+  "homepage": "https://github.com/phucbm/gulp-cheatsheet#readme",
+  "devDependencies": {
+    "browser-sync": "^2.27.7",
+    "gulp": "^4.0.2"
+  }
+}
