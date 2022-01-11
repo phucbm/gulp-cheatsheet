@@ -1,4 +1,4 @@
-# Gulp cheatsheet (test action)
+# Gulp cheatsheet
 
 > This file was auto-generated on {{date}}.
 
