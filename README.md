@@ -1,28 +1,30 @@
 # Gulp cheatsheet
 
-https://gulpjs.com/docs/en/getting-started/quick-start/
+🔗 https://gulpjs.com/docs/en/getting-started/quick-start/
 
 Create a package.json file in your project directory
 
-```text
+```shell
 npm init
 ```
 
 Install the gulp package
 
-```text
+```shell
 npm install --save-dev gulp
 ```
 
-Create a gulpfile
-
-Create a file named gulpfile.js in your project root.
+Create a file named `gulpfile.js` in your project root.
 
 ## Task
 
 ### Browser sync
 
-https://browsersync.io/docs/gulp
+🔗 https://browsersync.io/docs/gulp
+
+```shell
+npm install browser-sync gulp --save-dev
+```
 
 ```js
 const gulp = require('gulp');
@@ -35,22 +37,15 @@ gulpfile.task('serve', function(){
         browserSync.reload();
     });
 
-    // serve files from root directory
-    browserSync.init({
-        server: {
-            baseDir: "./"
-        }
-    });
 
-    // serve files from /app folder
     browserSync.init({
-        server: {
-            baseDir: "./app"
-        }
-    });
+        // serve files from root directory
+        server: {baseDir: "./"},
 
-    // serve files both root and /app
-    browserSync.init({
+        // serve files from /app folder
+        server: {baseDir: "./app"},
+
+        // serve files both root and /app
         server: ["./", "./app"]
     });
 });
@@ -58,27 +53,27 @@ gulpfile.task('serve', function(){
 
 ### Copy files to new folder
 
-https://gulpjs.com/docs/en/api/dest/
+🔗 https://gulpjs.com/docs/en/api/dest/
 
 ```js
 const gulp = require('gulp');
-const files = [
-    'assets/**/*.*', // all files and sub-folder in assets folder
-    'index.html'
-];
 
 // copy files and create /app folder in root
 gulp.task('create-app', () => {
-    return gulp.src(files, {base: './'})
+    return gulp.src([
+        // all files and sub-folder in assets folder
+        'assets/**/*.*',
+        'index.html'
+    ], {base: './'})
         .pipe(gulp.dest('app'));
 });
 ```
 
 ### Zip
 
-https://www.npmjs.com/package/gulp-zip
+🔗 https://www.npmjs.com/package/gulp-zip
 
-```text
+```shell
 npm install --save-dev gulp-zip
 ```
 
@@ -95,12 +90,24 @@ gulp.task('zip', () => {
 
 ### Delete
 
+🔗 https://github.com/gulpjs/gulp/blob/master/docs/recipes/delete-files-folder.md
+
+```shell
+npm install --save-dev gulp del
+```
+
 ```js
 const gulp = require('gulp');
 const del = require('del');
 
 gulp.task('clean', function(){
-    return del('dist', {force: true});
+    return del([
+        'dist/report.csv',
+        // here we use a globbing pattern to match everything inside the `mobile` folder
+        'dist/mobile/**/*',
+        // we don't want to clean this file though so we negate the pattern
+        '!dist/mobile/deploy.json'
+    ]);
 });
 ```
 
@@ -108,18 +115,29 @@ gulp.task('clean', function(){
 
 ### Replace
 
+🔗 https://www.npmjs.com/package/gulp-replace
+
+```shell
+npm install --save-dev gulp-replace
+```
+
 ```js
+const gulp = require('gulp');
+const replace = require('gulp-replace');
+
 gulp.task('replace', function(){
-    return gulp.src(['./scroll-snooper.js', './README.md', './test/*', './example/*'])
-        .pipe(replace(oldVersion, function handleReplace(match){
-            console.log(`[${count}] Found "${oldVersion}"`);
-            count++;
-            return newVersion;
-        }))
+    // replace and overwrite
+    return gulp.src(['file.txt'])
+        .pipe(replace('bar', 'foo'))
         .pipe(gulp.dest(function(file){
             console.log(file.base)
             return file.base;
         }, {overwrite: true}));
+
+    // replace and create new folder
+    return src(['file.txt'])
+        .pipe(replace('bar', 'foo'))
+        .pipe(dest('build/'));
 });
 ```
 
@@ -127,6 +145,8 @@ gulp.task('replace', function(){
 
 ### Group tasks
 
+🔗 https://gulpjs.com/docs/en/api/series/
+
 ```js
-gulp.task('export', gulp.series('dist', 'zip', 'clean'));
+gulp.task('export', gulp.series('dist', 'minify', 'clean'));
 ```
