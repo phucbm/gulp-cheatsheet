@@ -20,11 +20,29 @@ function formatDate(string = new Date()){
 }
 
 /**
- * Generate content from /src
+ * Capitalize the first letter in string
+ * @param string
+ * @returns {string}
+ */
+function capitalizeFirstLetter(string){
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
+/**
+ * Format title
+ * @param string
+ * @returns {string}
+ */
+const formatTitle = string => capitalizeFirstLetter(string.split('-').join(' ').replace('.md', ''));
+
+
+/**
+ * Generate content
  */
 gulp.task('content', function(callback){
     let string = '';
-    const path = 'src/';
+    const path = 'tasks/';
     const files = fs.readdirSync(path);
 
     // read src
@@ -32,7 +50,7 @@ gulp.task('content', function(callback){
         const content = fs.readFileSync(`${path}${file}`, {encoding: 'utf8', flag: 'rs'});
 
         // title
-        string += `### ${file}\n\n`;
+        string += `### ${formatTitle(file)}\n\n`;
 
         // content
         string += `${content}\n\n`;
@@ -70,5 +88,5 @@ gulp.task('export', gulp.series('content', 'header'));
  * Watch
  */
 gulp.task('serve', function(){
-    gulp.watch(['*.md', 'src/*.md', '!README.md'], gulp.series('export'));
+    gulp.watch(['*.md', 'tasks/*.md', '!README.md'], gulp.series('export'));
 });

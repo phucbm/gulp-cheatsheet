@@ -1,6 +1,6 @@
 # Gulp cheatsheet
 
-> This file was auto-generated on 2022/1/11 - 12:51.
+> This file was auto-generated on 2022/1/11 - 12:59.
 
 🔗 https://gulpjs.com/docs/en/getting-started/quick-start/
 
@@ -10,7 +10,6 @@ Create a package.json file in your project directory by running this command
 npm init
 ```
 
-Install the gulp package
 
 ```shell
 npm install --save-dev gulp
@@ -20,7 +19,7 @@ Create a file named `gulpfile.js` in your project root. This file will contain y
 
 ## Tasks
 
-### browser-sync.md
+### Browser sync
 
 🔗 https://browsersync.io/docs/gulp
 
@@ -53,7 +52,9 @@ gulp.task('serve', function(){
 });
 ```
 
-### clone-files.md
+Install the gulp package
+
+### Clone files
 
 🔗 https://gulpjs.com/docs/en/api/dest/
 
@@ -71,7 +72,7 @@ gulp.task('create-app', () => {
 });
 ```
 
-### delete.md
+### Delete
 
 🔗 https://github.com/gulpjs/gulp/blob/master/docs/recipes/delete-files-folder.md
 
@@ -94,7 +95,7 @@ gulp.task('clean', function(){
 });
 ```
 
-### read-file.md
+### Read file
 
 🔗 https://nodejs.org/api/fs.html
 
@@ -110,7 +111,7 @@ gulp.task('test', function(){
 });
 ```
 
-### replace.md
+### Replace
 
 🔗 https://www.npmjs.com/package/gulp-replace
 
@@ -138,7 +139,7 @@ gulp.task('replace', function(){
 });
 ```
 
-### series.md
+### Series
 
 🔗 https://gulpjs.com/docs/en/api/series/
 
@@ -146,7 +147,7 @@ gulp.task('replace', function(){
 gulp.task('export', gulp.series('dist', 'minify', 'clean'));
 ```
 
-### zip.md
+### Zip
 
 🔗 https://www.npmjs.com/package/gulp-zip
 
