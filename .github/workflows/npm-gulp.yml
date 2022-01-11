@@ -26,3 +26,8 @@ jobs:
       run: |
         npm install
         gulp export
+        
+    - name: Commit changes
+      uses: elstudio/actions-js-build/commit@v4
+      with:
+        commitMessage: Generate README.md
