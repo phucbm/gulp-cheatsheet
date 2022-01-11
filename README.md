@@ -1,6 +1,6 @@
 # Gulp cheatsheet
 
-> This file was auto-generated on 2022/1/11 - 12:59.
+> This file was auto-generated on 2022/1/11 - 13:14.
 
 🔗 https://gulpjs.com/docs/en/getting-started/quick-start/
 
@@ -10,6 +10,7 @@ Create a package.json file in your project directory by running this command
 npm init
 ```
 
+Install the gulp package
 
 ```shell
 npm install --save-dev gulp
@@ -19,7 +20,7 @@ Create a file named `gulpfile.js` in your project root. This file will contain y
 
 ## Tasks
 
-### Browser sync
+### [Browser sync](https://phucbm.github.io/gulp-cheatsheet/tasks/browser-sync)
 
 🔗 https://browsersync.io/docs/gulp
 
@@ -52,9 +53,7 @@ gulp.task('serve', function(){
 });
 ```
 
-Install the gulp package
-
-### Clone files
+### [Clone files](https://phucbm.github.io/gulp-cheatsheet/tasks/clone-files)
 
 🔗 https://gulpjs.com/docs/en/api/dest/
 
@@ -72,7 +71,7 @@ gulp.task('create-app', () => {
 });
 ```
 
-### Delete
+### [Delete](https://phucbm.github.io/gulp-cheatsheet/tasks/delete)
 
 🔗 https://github.com/gulpjs/gulp/blob/master/docs/recipes/delete-files-folder.md
 
@@ -95,7 +94,7 @@ gulp.task('clean', function(){
 });
 ```
 
-### Read file
+### [Read file](https://phucbm.github.io/gulp-cheatsheet/tasks/read-file)
 
 🔗 https://nodejs.org/api/fs.html
 
@@ -111,7 +110,7 @@ gulp.task('test', function(){
 });
 ```
 
-### Replace
+### [Replace](https://phucbm.github.io/gulp-cheatsheet/tasks/replace)
 
 🔗 https://www.npmjs.com/package/gulp-replace
 
@@ -139,7 +138,7 @@ gulp.task('replace', function(){
 });
 ```
 
-### Series
+### [Series](https://phucbm.github.io/gulp-cheatsheet/tasks/series)
 
 🔗 https://gulpjs.com/docs/en/api/series/
 
@@ -147,7 +146,20 @@ gulp.task('replace', function(){
 gulp.task('export', gulp.series('dist', 'minify', 'clean'));
 ```
 
-### Zip
+### [Watch](https://phucbm.github.io/gulp-cheatsheet/tasks/watch)
+
+🔗 https://gulpjs.com/docs/en/api/watch/
+
+```javascript
+const gulp = require('gulp');
+
+gulp.task('serve', function(){
+    // run task on file change
+    gulp.watch(['filename.txt'], gulp.series('export'));
+});
+```
+
+### [Zip](https://phucbm.github.io/gulp-cheatsheet/tasks/zip)
 
 🔗 https://www.npmjs.com/package/gulp-zip
 

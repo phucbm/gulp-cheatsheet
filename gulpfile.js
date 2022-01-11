@@ -50,7 +50,8 @@ gulp.task('content', function(callback){
         const content = fs.readFileSync(`${path}${file}`, {encoding: 'utf8', flag: 'rs'});
 
         // title
-        string += `### ${formatTitle(file)}\n\n`;
+        const name = file.replace('.md', '');
+        string += `### [${formatTitle(file)}](https://phucbm.github.io/gulp-cheatsheet/tasks/${name})\n\n`;
 
         // content
         string += `${content}\n\n`;
