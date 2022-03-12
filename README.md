@@ -1,6 +1,6 @@
 # Gulp cheatsheet
 
-> This file was auto-generated on 2022/3/12 - 12:20.
+> This file was auto-generated on 2022/3/12 - 13:1.
 
 🔗 https://gulpjs.com/docs/en/getting-started/quick-start/
 
