@@ -1,6 +1,6 @@
 # Gulp cheatsheet
 
-> This file was auto-generated on 2022/1/11 - 06:56.
+> This file was auto-generated on 2022/3/12 - 12:20.
 
 🔗 https://gulpjs.com/docs/en/getting-started/quick-start/
 
@@ -95,6 +95,46 @@ gulp.task('clean', function(){
 });
 ```
 
+### [Minify css](https://phucbm.github.io/gulp-cheatsheet/tasks/minify-css)
+
+🔗 https://www.npmjs.com/package/gulp-clean-css
+
+```shell
+npm install --save-dev gulp-clean-css
+```
+
+```javascript
+const gulp = require('gulp');
+const cleanCSS = require('gulp-clean-css');
+
+gulp.task('minify-css', () => {
+    return gulp.src('src/*.css')
+        .pipe(rename({extname: '.min.css'}))
+        .pipe(cleanCSS({compatibility: 'ie8'}))
+        .pipe(gulp.dest('dist'));
+});
+```
+
+### [Minify js](https://phucbm.github.io/gulp-cheatsheet/tasks/minify-js)
+
+🔗 https://www.npmjs.com/package/gulp-uglify
+
+```shell
+npm install --save-dev gulp-uglify
+```
+
+```javascript
+const gulp = require('gulp');
+const uglify = require('gulp-uglify');
+
+gulp.task('minify-js', function(){
+    return gulp.src(['src/*.js'])
+        .pipe(rename({extname: '.min.js'}))
+        .pipe(uglify(/* options */))
+        .pipe(gulp.dest("dist"));
+});
+```
+
 ### [Read file](https://phucbm.github.io/gulp-cheatsheet/tasks/read-file)
 
 🔗 https://nodejs.org/api/fs.html
@@ -145,31 +185,6 @@ gulp.task('replace', function(){
 
 ```js
 gulp.task('export', gulp.series('dist', 'minify', 'clean'));
-```
-
-### [Uglify](https://phucbm.github.io/gulp-cheatsheet/tasks/uglify)
-
-🔗 https://www.npmjs.com/package/gulp-uglify
-
-```shell
-npm install --save-dev gulp-uglify
-```
-
-```javascript
-const gulp = require('gulp');
-const uglify = require('gulp-uglify');
-
-gulp.task('compress', function(){
-    return gulp.src(['foo.js'], {base: "./"})
-        // This will uglify and rename to foo.min.js
-        .pipe(uglify({
-            output: {
-                comments: /!/
-            }
-        }))
-        .pipe(rename({extname: '.min.js'}))
-        .pipe(gulp.dest('.'));
-});
 ```
 
 ### [Watch](https://phucbm.github.io/gulp-cheatsheet/tasks/watch)
